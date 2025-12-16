@@ -3,7 +3,7 @@ import "./onSaleNow.css";
 
 export default function OnSaleNow() {
 	return (
-		<div>
+		<div class = "on-sale-now">
 			<h1>On Sale Now!</h1>
 			<ProductCard
 				name="Macbook Air"

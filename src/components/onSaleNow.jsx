@@ -1,6 +1,4 @@
 import ProductCard from "./productCard";
-import "./onSaleNow.css";
-
 export default function OnSaleNow() {
 	return (
 		<div class = "on-sale-now">

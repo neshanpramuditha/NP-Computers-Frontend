@@ -7,7 +7,7 @@ function App() { //මේකත් සම්පුර්ණ website එකම �
                 // ProductCard, onSaleNow tag වගේම 
   return (
       <>
-      <div className="w-full h-screen">
+      <div className="w-full h-screen bg-primary text-secondary">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/admin/*" element={<AdminPage />} /> {/* admin කියල එන ඕන  දෙයක් ගන්නව /* එක දැම්මම (ex- /admin/products)*/}

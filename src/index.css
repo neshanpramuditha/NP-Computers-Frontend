@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@theme{ /*අපිට ඕන පාටක් ඇඩ් කරගන්න පුළුවන් මෙහෙම */
+    --color-primary: #d4f0fc;
+    --color-secondary: #01303f;
+    --color-accent: #02a9f7;
+} 

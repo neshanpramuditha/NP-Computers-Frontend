@@ -4,7 +4,7 @@ export default function AdminAddProductPage(){
 
     const [productId, setProductId] = useState("");
     const [name, setName] = useState("");
-    const [discription, setDescription] = useState("");
+    const [description, setDescription] = useState("");
     const [altNames, setAltNames] = useState("");
     const [price, setPrice] = useState("");
     const [labledprice, setLabledPrice] = useState("");
@@ -128,7 +128,7 @@ export default function AdminAddProductPage(){
                 <option value="Microsoft">Microsoft</option>
                 <option value="Others">Others</option>
         
-            </select>    
+            </select> 
             </div>
 
             {/* Model -------------------------------------------*/}
@@ -149,7 +149,7 @@ export default function AdminAddProductPage(){
             <select value = {isVisible}
             onChange={
                 (e)=>{
-                    setBrand(e.target.value)
+                    setIsVisible(e.target.value)
                 }
             }
             type="text" placeholder="True" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 flex  focus:outline-white">

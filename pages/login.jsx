@@ -3,6 +3,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
+
 export default function LoginPage(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -34,6 +35,9 @@ export default function LoginPage(){
                 password: password
             })
             console.log(response)
+
+            localStorage.setItem("token",response.data.token)
+
             if(response.data.role == "admin"){
                 //Redirect to Admin dashboard
                 //window.location.href = "/admin/" මේකෙදි පේජ් එකකින් පේජ් එකකට අයනකොට ස්මූත් නෑ - පරණ  කරමය මේක

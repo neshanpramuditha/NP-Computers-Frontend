@@ -1,4 +1,6 @@
 import { useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function AdminAddProductPage(){
 
@@ -13,9 +15,40 @@ export default function AdminAddProductPage(){
     const [model, setModel] = useState("");
     const [isVisible, setIsVisible] = useState(true);
 
+    async function handleAddProduct(){
+        try {
+            const token = localStorage.getItem("token");
+            if(token == null){
+                toast.error("You must be logged in to perform this action.");
+                window.location.href = "/login";
+                return;
+            }
+
+            await axios.post(import.meta.env.VITE_API_URL + "/products",{
+                productId: productId,
+                name: name,
+                description: description,
+                price: price,
+                labledPrice: labledprice,
+                category: category,
+                brand: brand,
+                model:model,
+                isVisible: isVisible
+            })
+
+        }
+        catch(error){
+            toast.error("Failed to add product. Please try again.")
+            console.error(error);
+            return;
+        }
+
+    }
+
 
     return(
-        <div className="w-full max-h-full flex flex-wrap">
+        <div className="w-full max-h-full flex flex-wrap items-start overflow-y-scroll hide-scroll-track">
+            <h1 className="w-full text-3xl font-bold mb-4 sticky top-0 bg-primary">Add New Product</h1>
             <div className="w-[50%] h-[120px] flex flex-col">
             <label className="text-xl font-bold ml-2">Product ID</label>
             <input value = {productId} 
@@ -156,6 +189,12 @@ export default function AdminAddProductPage(){
                 <option value="true">True</option>
                 <option value="false">False</option>
             </select>    
+            </div>
+
+            <div className="w-full h-[80px] bg-white sticky bottom-0 rounded-b-2xl flex justify-end items-center p-4">
+                <button onClick={handleAddProduct} className="bg-accent text-white font-bold py-2 px-4 rounded-[10px] hover:bg-blue-500">Add Product</button>
+                <button className="bg-red-500 text-white font-bold py-2 px-4 rounded-[10px] hover:bg-red-600 ml-4">Cancel</button>
+
             </div>
 
 

@@ -49,8 +49,7 @@ export default function LoginPage(){
             toast.success("Login successful")
         }
         catch(error){
-            console.log(error)
-            toast.error("Login failed")
+            toast.error(error?.response?.data?. message || "Login failed. Please check your credentials and try again.")
         }
     }
 

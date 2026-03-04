@@ -1,45 +1,85 @@
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+// import uploadFile from "../../utils/mediaUpload";
 
 export default function AdminAddProductPage(){
 
-    const [productId, setProductId] = useState("");
+    const [productID, setproductID] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [altNames, setAltNames] = useState("");
     const [price, setPrice] = useState("");
-    const [labledprice, setLabledPrice] = useState("");
+    const [labelledPrice, setLabelledPrice] = useState("");
     const [category, setCategory] = useState("Others");
     const [brand, setBrand] = useState("Standard");
     const [model, setModel] = useState("");
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setisVisible] = useState(true);
+    // const [files , setFiles] = useState([]);
+    const navigate = useNavigate()
 
     async function handleAddProduct(){
         try {
+
+            if(productID == ""){
+            toast.error("Product ID cannot be empty");
+            return;
+            }
+            if(name == ""){
+                toast.error("Product name cannot be empty");
+                return;
+            }
+                        
+            if(description == ""){
+                toast.error("Product description cannot be empty");
+                return;
+            }
             const token = localStorage.getItem("token");
+
             if(token == null){
-                toast.error("You must be logged in to perform this action.");
+                toast.error("You must be logged in to add a product");
                 window.location.href = "/login";
                 return;
             }
 
+            // const fileUploadPromises = [];
+            
+            // for(let i=0 ; i<files.length ; i++){
+            
+            // fileUploadPromises[i] = uploadFile(files[i])
+
+            // }
+            // const imageURLs = await Promise.all(fileUploadPromises);
+
+            //"sound,base,audio,bluetooth"
+            //altNames.split(",") => ["sound","base","audio","bluetooth"]
             await axios.post(import.meta.env.VITE_API_URL + "/products",{
-                productId: productId,
+                productID: productID,
                 name: name,
                 description: description,
                 price: price,
-                labledPrice: labledprice,
+                labelledPrice: labelledPrice,
+                altNames:altNames.split(","),
+                // images:imageURLs,
                 category: category,
                 brand: brand,
                 model:model,
                 isVisible: isVisible
+            },{
+                headers:{
+                    Authorization: "Bearer " + token
+                }
             })
+            toast.success("Product added successfully!");
+            
+            // Redirect to the products page after successful addition
+            navigate("/admin/products");
 
         }
-        catch(error){
-            toast.error("Failed to add product. Please try again.")
-            console.error(error);
+        catch (error) {
+            // console.error("CREATE PRODUCT ERROR:", error.response?.data || error);
+            toast.error(error.response?.data?.message || "Failed to add product");
             return;
         }
 
@@ -51,13 +91,13 @@ export default function AdminAddProductPage(){
             <h1 className="w-full text-3xl font-bold mb-4 sticky top-0 bg-primary">Add New Product</h1>
             <div className="w-[50%] h-[120px] flex flex-col">
             <label className="text-xl font-bold ml-2">Product ID</label>
-            <input value = {productId} 
+            <input value = {productID} 
             onChange={
                 (e)=>{
-                    setProductId(e.target.value)
+                    setproductID(e.target.value)
                 }
             }
-            type="text" placeholder="Ex: ID001" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 flex  focus:outline-white"/>
+            type="text" placeholder="Ex: ID001" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 focus:outline-white"/>
             </div>
 
             {/* Product Name -------------------------------------------*/}
@@ -69,7 +109,7 @@ export default function AdminAddProductPage(){
                     setName(e.target.value)
                 }
             }
-            type="text" placeholder="Ex: Laptop" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 flex  focus:outline-white"/>
+            type="text" placeholder="Ex: Laptop" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 focus:outline-white"/>
             </div>
 
             {/* Description -------------------------------------------*/}
@@ -81,19 +121,32 @@ export default function AdminAddProductPage(){
                     setDescription(e.target.value)
                 }
             }
-            type="text" placeholder="Type here..." className="h-[100px] border-4 border-accent rounded-[10px] p-2 m-2 flex  focus:outline-white"/>
+            type="text" placeholder="Type here..." className="h-[100px] border-4 border-accent rounded-[10px] p-2 m-2 focus:outline-white"/>
             </div>
+
+            {/* Add Images----------------------------------------------------
+            <div className="w-full h-[120px] flex flex-col">
+                <label className="font-bold ml-2">Images</label>
+                <input multiple 
+                onChange={
+                    (e)=>{
+                        setFiles(e.target.files)
+                    }
+                }
+                
+                type="file" className="border-4 border-accent rounded-[10px] h-[50px] p-2 m-2 focus:outline-white"/>
+            </div> */}
 
             {/* Alternative Names -------------------------------------------*/}
             <div className="w-full h-[120px] flex flex-col">
-            <label className="text-xl font-bold ml-2">Alternative Names</label>
+            <label className="text-xl font-bold ml-2">Alternative Names (Comma Separated)</label>
             <input value = {altNames}
             onChange={
                 (e)=>{
                     setAltNames(e.target.value)
                 }
             }
-            type="text" placeholder="Ex: HP" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 flex  focus:outline-white"/>
+            placeholder="Ex: Laptop, Notebook, Portable Computer" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 focus:outline-white"/>
             </div>
             
             {/* Price -------------------------------------------*/}
@@ -105,19 +158,19 @@ export default function AdminAddProductPage(){
                     setPrice(e.target.value)
                 }
             }
-            type="text" placeholder="250000" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 flex  focus:outline-white"/>
+            type="number" placeholder="250000" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 focus:outline-white"/>
             </div>
 
-            {/* Labled Price -------------------------------------------*/}
+            {/* LabelledPrice Price -------------------------------------------*/}
             <div className="w-[50%] h-[120px] flex flex-col">
             <label className="text-xl font-bold ml-2">Labled Price</label>
-            <input value = {labledprice}
+            <input value = {labelledPrice}
             onChange={
                 (e)=>{
-                    setLabledPrice(e.target.value)
+                    setLabelledPrice(e.target.value)
                 }
             }
-            type="text" placeholder="280000" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 flex  focus:outline-white"/>
+            type="number" placeholder="280000" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 focus:outline-white"/>
             </div>
 
             {/* Category -------------------------------------------*/}
@@ -129,7 +182,7 @@ export default function AdminAddProductPage(){
                     setCategory(e.target.value)
                 }
             }
-            type="text" placeholder="Laptop" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 flex  focus:outline-white">
+            className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 focus:outline-white">
                 <option value="Laptops">Laptops</option>
                 <option value="Desktops">Desktops</option>
                 <option value="Monitors">Monitors</option>
@@ -149,7 +202,7 @@ export default function AdminAddProductPage(){
                     setBrand(e.target.value)
                 }
             }
-            type="text" placeholder="HP" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 flex  focus:outline-white">
+            className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2  focus:outline-white">
                 <option value="Standard">Standard</option>
                 <option value="HP">HP</option>
                 <option value="Dell">Dell</option>
@@ -173,7 +226,7 @@ export default function AdminAddProductPage(){
                     setModel(e.target.value)
                 }
             }
-            type="text" placeholder="Ex: Inspiron 15" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 flex  focus:outline-white"/>   
+            type="text" placeholder="Ex: Inspiron 15" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 focus:outline-white"/>   
             </div>
 
             {/* Is Visible -------------------------------------------*/}
@@ -182,12 +235,12 @@ export default function AdminAddProductPage(){
             <select value = {isVisible}
             onChange={
                 (e)=>{
-                    setIsVisible(e.target.value)
+                    setisVisible(e.target.value === "true")
                 }
             }
-            type="text" placeholder="True" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 flex  focus:outline-white">
-                <option value="true">True</option>
-                <option value="false">False</option>
+            placeholder="True" className="h-[40px] border-4 border-accent rounded-[10px] p-2 m-2 focus:outline-white">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
             </select>    
             </div>
 

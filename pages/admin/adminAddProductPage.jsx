@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-// import uploadFile from "../../utils/mediaUpload";
+import uploadFile from "../utils/mediaUpload";
 
 export default function AdminAddProductPage(){
 
@@ -16,12 +16,11 @@ export default function AdminAddProductPage(){
     const [brand, setBrand] = useState("Standard");
     const [model, setModel] = useState("");
     const [isVisible, setisVisible] = useState(true);
-    // const [files , setFiles] = useState([]);
+    const [files , setFiles] = useState([]);
     const navigate = useNavigate()
 
     async function handleAddProduct(){
         try {
-
             if(productID == ""){
             toast.error("Product ID cannot be empty");
             return;
@@ -43,17 +42,17 @@ export default function AdminAddProductPage(){
                 return;
             }
 
-            // const fileUploadPromises = [];
+            const fileUploadPromises = [];
             
-            // for(let i=0 ; i<files.length ; i++){
+            for(let i=0 ; i<files.length ; i++){
             
-            // fileUploadPromises[i] = uploadFile(files[i])
+            fileUploadPromises[i] = uploadFile(files[i])
 
-            // }
-            // const imageURLs = await Promise.all(fileUploadPromises);
+            } 
+            const imageURLs = await Promise.all(fileUploadPromises);
 
-            //"sound,base,audio,bluetooth"
-            //altNames.split(",") => ["sound","base","audio","bluetooth"]
+            // "sound,base,audio,bluetooth"
+            // altNames.split(",") => ["sound","base","audio","bluetooth"]
             await axios.post(import.meta.env.VITE_API_URL + "/products",{
                 productID: productID,
                 name: name,
@@ -61,7 +60,7 @@ export default function AdminAddProductPage(){
                 price: price,
                 labelledPrice: labelledPrice,
                 altNames:altNames.split(","),
-                // images:imageURLs,
+                images:imageURLs,
                 category: category,
                 brand: brand,
                 model:model,
@@ -124,7 +123,7 @@ export default function AdminAddProductPage(){
             type="text" placeholder="Type here..." className="h-[100px] border-4 border-accent rounded-[10px] p-2 m-2 focus:outline-white"/>
             </div>
 
-            {/* Add Images----------------------------------------------------
+            {/* Add Images---------------------------------------------------- */}
             <div className="w-full h-[120px] flex flex-col">
                 <label className="font-bold ml-2">Images</label>
                 <input multiple 
@@ -135,7 +134,7 @@ export default function AdminAddProductPage(){
                 }
                 
                 type="file" className="border-4 border-accent rounded-[10px] h-[50px] p-2 m-2 focus:outline-white"/>
-            </div> */}
+            </div>
 
             {/* Alternative Names -------------------------------------------*/}
             <div className="w-full h-[120px] flex flex-col">

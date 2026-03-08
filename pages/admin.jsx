@@ -4,6 +4,7 @@ import { MdOutlineInventory } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
 import AdminProductPage from "./admin/adminProductPage";
 import AdminAddProductPage from "./admin/adminAddProductPage";
+import AdminUpdateProductPage from "./admin/adminUpdateProductPage";
 
 export default function AdminPage(){
     return(
@@ -24,7 +25,8 @@ export default function AdminPage(){
                     <Route path="/" element={<h1>Orders Page</h1>} />
                     <Route path="/products" element={<AdminProductPage/>} />
                     <Route path="/users" element={<h1>Users Page</h1>} />
-                    <Route path ="/add-product" element={<AdminAddProductPage/>} />"
+                    <Route path ="/add-product" element={<AdminAddProductPage/>} /> 
+                    <Route path="/update-product" element={<AdminUpdateProductPage/>}/>
                 </Routes>
             </div>
         </div>

@@ -9,7 +9,7 @@
 
 /*Transparent scroll track class called hide-scroll-track*/
 .hide-scroll-track::-webkit-scrollbar{
-  width: 8px;
+  width: 6px;
 }
 .hide-scroll-track::-webkit-scrollbar-track{
   background: transparent;
@@ -17,5 +17,5 @@
 .hide-scroll-track::-webkit-scrollbar-thumb{
   background-color: rgba(0,0,0,0.2);
   border-radius: 20px;
-  border: 3px solid transparent;
+  border: 2px solid transparent;
 }

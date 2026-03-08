@@ -3,101 +3,20 @@ import { FaPlus } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import getFormattedPrice from "../utils/price-format";
 import axios from "axios";
-
-const sampleProducts = [
-  {
-    productID: "P1001",
-    name: "Wireless Bluetooth Headphones",
-    description: "High quality wireless headphones with noise cancellation.",
-    altNames: ["Bluetooth Headset", "Wireless Headphones"],
-    price: 12500,
-    labelledPrice: 15000,
-    category: "Electronics",
-    images: [
-      "/images/headphones-1.png",
-      "/images/headphones-2.png"
-    ],
-    isVisible: true,
-    brand: "Sony",
-    model: "WH-CH520",
-    qty: 50
-  },
-  {
-    productID: "P1002",
-    name: "Gaming Mouse RGB",
-    description: "Ergonomic gaming mouse with customizable RGB lighting.",
-    altNames: ["RGB Mouse", "Gaming Mouse"],
-    price: 4500,
-    labelledPrice: 5500,
-    category: "Accessories",
-    images: [
-      "/images/mouse-1.png",
-      "/images/mouse-2.png"
-    ],
-    isVisible: true,
-    brand: "Logitech",
-    model: "G102",
-    qty: 75
-  },
-  {
-    productID: "P1003",
-    name: "Mechanical Keyboard",
-    description: "Mechanical keyboard with blue switches for tactile feedback.",
-    altNames: ["Gaming Keyboard", "Mech Keyboard"],
-    price: 9800,
-    labelledPrice: 11500,
-    category: "Accessories",
-    images: [
-      "/images/keyboard-1.png",
-      "/images/keyboard-2.png"
-    ],
-    isVisible: true,
-    brand: "Redragon",
-    model: "K552",
-    qty: 40
-  },
-  {
-    productID: "P1004",
-    name: "Smart Watch Series 7",
-    description: "Fitness tracking smartwatch with heart rate monitor.",
-    altNames: ["Fitness Watch", "Smartwatch"],
-    price: 22000,
-    labelledPrice: 25000,
-    category: "Wearables",
-    images: [
-      "/images/smartwatch-1.png",
-      "/images/smartwatch-2.png"
-    ],
-    isVisible: true,
-    brand: "Apple",
-    model: "Series 7",
-    qty: 30
-  },
-  {
-    productID: "P1005",
-    name: "Portable Power Bank 20000mAh",
-    description: "High capacity power bank with fast charging support.",
-    altNames: ["Power Bank", "Portable Charger"],
-    price: 6500,
-    labelledPrice: 7500,
-    category: "Electronics",
-    images: [
-      "/images/powerbank-1.png",
-      "/images/powerbank-2.png"
-    ],
-    isVisible: true,
-    brand: "Anker",
-    model: "PowerCore 20000",
-    qty: 60
-  }
-];
+import { CiEdit } from "react-icons/ci";
+import { CiTrash } from "react-icons/ci";
+import LoadingAnimation from "../../src/components/loadingAnimation";
+import DeleteModel from "../../src/components/deleteModel";
 
 export default function AdminProductPage(){
 
-    const[products,setProducts] = useState(sampleProducts);
+    const[products,setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
     
     useEffect(
+      
       ()=>{
+        if(loading){
             const token = localStorage.getItem("token");
     
     axios.get(import.meta.env.VITE_API_URL + "/products" ,{
@@ -106,9 +25,10 @@ export default function AdminProductPage(){
         }
     }).then((response) => {
         setProducts(response.data);
-    })
-      }, []
-    )
+        setLoading(false);
+    });
+  }
+      }, [loading])
 
     return(
         <div className="w-full h-full overflow-hidden">
@@ -124,12 +44,15 @@ export default function AdminProductPage(){
     </div>
 
     {/* Scrollable Table */}
-    <div className="max-h-[500px] overflow-y-auto overflow-x-auto">
+    <div className="max-h-[500px] overflow-y-scroll overflow-x-scroll hide-scroll-track">
 
+      {loading ?
+      <div className="w-full h-full flex justify-center items-center"><LoadingAnimation/>
+      </div> : 
       <table className="min-w-full text-sm text-left">
 
         {/* Sticky Head */}
-        <thead className="bg-primary text-secondary uppercase text-xs sticky top-0 z-10">
+        <thead className="bg-primary text-secondary uppercase text-sm sticky top-0 z-10">
           <tr>
             <th className="px-6 py-4">Product ID</th>
             <th className="px-6 py-4">Name</th>
@@ -140,6 +63,7 @@ export default function AdminProductPage(){
             <th className="px-6 py-4">Visibility</th>
             <th className="px-6 py-4">Brand</th>
             <th className="px-6 py-4">Model</th>
+            <th className="px-6 py-4">Actions</th>
           </tr>
         </thead>
 
@@ -167,7 +91,7 @@ export default function AdminProductPage(){
               </td>
 
               <td className="px-6 py-4">
-                <span className="bg-primary text-secondary px-3 py-1 rounded-full text-xs">
+                <span className="bg-primary text-secondary px-3 py-1 rounded-full text-center text-xs">
                   {item.category || "Uncategorized"} 
                 </span>
               </td>
@@ -199,11 +123,21 @@ export default function AdminProductPage(){
               <td className="px-6 py-4 text-secondary whitespace-nowrap">
                 {item.model || <span className="text-secondary/40">N/A</span>}
               </td>
+
+              <td className="px-6 py-4">
+
+                <div className="flex justify-center items-center text-2xl gap-2">
+                <Link to = "/admin/update-product" state = {item} className="hover:text-accent"><CiEdit/></Link>
+                
+                <DeleteModel products={item} setLoading={setLoading}/>
+                </div>
+
+              </td>
             </tr>
           ))}
         </tbody>
 
-      </table>
+      </table>}
 
     </div>
   </div>

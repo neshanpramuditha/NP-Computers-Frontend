@@ -1,7 +1,20 @@
+import { Route, Routes } from "react-router-dom";
+import Header from "../src/components/header";
+import ProductPage from "./productPage";
+import Overview from "../src/components/overview";
+
 export default function HomePage(){
     return(
-        <div>
-            Home Page
+        <div className="w-full max-h-screen ">
+            <Header/>
+            <Routes>
+                <Route path = "/" element= {<div>Home Page Content</div>} />
+                <Route path = "/about" element= {<div>About Page Content</div>} />
+                <Route path = "/contact" element= {<div>Contact Page Content</div>} />
+                <Route path = "/products" element= {<ProductPage/>} />
+                <Route path="/overview/:productID" element={<Overview/>}/>
+                <Route path = "/*" element= {<div>404 Not Found</div>} />
+            </Routes>
         </div>
     )
 }

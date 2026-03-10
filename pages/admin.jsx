@@ -6,6 +6,7 @@ import AdminProductPage from "./admin/adminProductPage";
 import AdminAddProductPage from "./admin/adminAddProductPage";
 import AdminUpdateProductPage from "./admin/adminUpdateProductPage";
 
+
 export default function AdminPage(){
     return(
         <div className="w-full h-full border-4 border-blue-400 bg-accent
@@ -27,6 +28,7 @@ export default function AdminPage(){
                     <Route path="/users" element={<h1>Users Page</h1>} />
                     <Route path ="/add-product" element={<AdminAddProductPage/>} /> 
                     <Route path="/update-product" element={<AdminUpdateProductPage/>}/>
+                    
                 </Routes>
             </div>
         </div>

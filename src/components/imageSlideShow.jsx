@@ -27,7 +27,7 @@ export default function ImageSlideShow(props){
                                 className={`w-[80px] h-[80px] object-cover rounded-[20px] cursor-pointer border-3 transition duration-200
                                 ${
                                     selectedImage === index
-                                    ? "border-secondary scale-104"
+                                    ? "border-red-600 scale-104"
                                     : "border-accent opacity-80 hover:opacity-100"
                                 }`}
                             />

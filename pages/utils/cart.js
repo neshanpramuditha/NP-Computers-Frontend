@@ -70,3 +70,16 @@ export function addToCart(product, qty){
         const cartString = JSON.stringify(cart)
         localStorage.setItem("cart", cartString)
 }
+
+// Function for displaing total products price in the cart
+export function getCartTotal(cart){
+    let total = 0
+
+    // cart එකෙන් item එක item එක ගානේ ගන්නවා 
+    cart.forEach( 
+        (cartItem)=>{
+            total += cartItem.product.price * cartItem.qty
+        }
+    )
+    return total
+}

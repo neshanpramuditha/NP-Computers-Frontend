@@ -1,12 +1,19 @@
 import { useState } from "react"
-import { addToCart, getCart, getCartTotal } from "./utils/cart"
+import { getCartTotal } from "./utils/cart"
 import { BiMinus, BiPlus } from "react-icons/bi"
 import getFormattedPrice from "./utils/price-format"
-import { Link } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
-export default function Cart(){
-    const [cart, setcart] =useState(getCart())
-    
+export default function Checkout(){
+
+    const location = useLocation()
+    const [cart, setcart] = useState(location.state || [])
+    const navigate = useNavigate()
+
+    if (location.state == null){
+        navigate ("/products")
+    }
+        
     return(
         <div className="w-full h-[calc(100vh-50px)] overflow-y-scroll bg-gray-50">
             
@@ -40,8 +47,14 @@ export default function Cart(){
                                             
                                             <button onClick={
                                                 ()=>{
-                                                    addToCart(cartItem.product, -1)
-                                                    setcart(getCart())
+                                                    const newCart = [...cart]
+
+                                                    newCart[index].qty = newCart[index].qty - 1
+
+                                                    if(newCart[index].qty <= 0){
+                                                        newCart.splice(index,1)
+                                                    }
+                                                    setcart(newCart)
                                                 }
                                             } 
                                             className="w-[70px] h-full flex justify-center items-center text-xl text-gray-600 hover:bg-accent hover:text-white transition-colors duration-200">
@@ -54,8 +67,9 @@ export default function Cart(){
 
                                             <button onClick={
                                                 ()=>{
-                                                    addToCart(cartItem.product, 1)
-                                                    setcart(getCart())
+                                                    const newCart = [...cart] //Cart එකේ තියෙන ඒවා කොපියක් අරන් newCart variable එකට දාගන්න කියල කියන්නේ මෙහෙම. සාමාන්‍ය variable එකක් assign කරනවා වගේ කරන්න බෑ cart කියන එක ලොකු array එකක් නිසා 
+                                                    newCart[index].qty = newCart[index].qty + 1
+                                                    setcart(newCart)
                                                 }
                                             }
                                             className="w-[70px] h-full flex justify-center items-center text-xl text-gray-600 hover:bg-accent hover:text-white transition-colors duration-200">
@@ -94,9 +108,9 @@ export default function Cart(){
 
             <div className="bg-secondary w-[650px] h-[100px] sticky bottom-0 rounded-2xl shadow-lg flex items-center px-6 border border-gray-100">
 
-                <Link state={cart} to="/checkout" className="bg-blue-500 text-white font-semibold px-6 py-3 rounded-full hover:bg-blue-600 transition-all shadow-md">
-                    CHECKOUT
-                </Link>
+                <button className="bg-blue-500 text-white font-semibold px-6 py-3 rounded-full hover:bg-blue-600 transition-all shadow-md">
+                    BUY NOW
+                </button>
 
                 <span className="text-2xl font-bold text-white absolute right-6 border-b-2 border-accent pb-1 hover:border-red-500">
                     {getFormattedPrice(getCartTotal(cart))}

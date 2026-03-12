@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState} from "react"
 import toast from "react-hot-toast"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import LoadingAnimation from "../src/components/loadingAnimation"
 import ImageSlideShow from "../src/components/imageSlideShow"
 import getFormattedPrice from "./utils/price-format"
@@ -78,13 +78,23 @@ export default function Overview(){
                                     addToCart(product , 1)
                                     toast.success(product.name + " added to cart")
                                 }
-                            }>Add to Cart</button>
+                            }>ADD TO CART</button>
 
-                            <button className="px-4 py-2 bg-blue-500 rounded hover:bg-blue-600 ml-4 text-bold cursor-pointer" onClick={
-                                ()=>{
-                                    console.log(getCart())
-                                }
-                            }>Buy Now</button>
+                            <Link to="/checkout" state={
+                                [
+                                    {
+                                        product:{
+                                            name:product.name,
+                                            price:product.price,
+                                            labelledPrice:product.labelledPrice,
+                                            image:product.images[0],
+                                            productID:product.productID
+                                        },
+                                        qty:1
+                                    }
+
+                                ]
+                            } className="px-4 py-2 bg-blue-500 rounded hover:bg-blue-600 ml-4 text-bold cursor-pointer">BUY NOW</Link>
 
 
                         </div>

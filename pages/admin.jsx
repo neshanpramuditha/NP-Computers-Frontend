@@ -5,6 +5,7 @@ import { FaUserFriends } from "react-icons/fa";
 import AdminProductPage from "./admin/adminProductPage";
 import AdminAddProductPage from "./admin/adminAddProductPage";
 import AdminUpdateProductPage from "./admin/adminUpdateProductPage";
+import AdminOrdersPage from "./admin/adminOrdersPage";
 
 
 export default function AdminPage(){
@@ -23,7 +24,7 @@ export default function AdminPage(){
             300px ක් දුබුරු කොටුව ආවම අනිත් කොටුව page එකේ සම්පුර්ණ ඉඩ ගන්නවා එතකොට.
             මේක flex-1 කියල දීල කරනවට වඩා සාර්ථකයි */}
                 <Routes>
-                    <Route path="/" element={<h1>Orders Page</h1>} />
+                    <Route path="/" element={<AdminOrdersPage/>} />
                     <Route path="/products" element={<AdminProductPage/>} />
                     <Route path="/users" element={<h1>Users Page</h1>} />
                     <Route path ="/add-product" element={<AdminAddProductPage/>} /> 

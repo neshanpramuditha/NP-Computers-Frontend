@@ -3,6 +3,7 @@ import { getCartTotal } from "./utils/cart"
 import { BiMinus, BiPlus } from "react-icons/bi"
 import getFormattedPrice from "./utils/price-format"
 import { useLocation, useNavigate } from "react-router-dom"
+import CheckoutDetailsModal from "../src/components/checkoutdetailsModel"
 
 export default function Checkout(){
 
@@ -13,7 +14,31 @@ export default function Checkout(){
     if (location.state == null){
         navigate ("/products")
     }
+    
+    // // Place කරන ඕඩර් එකේ විස්තර BackEnd එකට යවන්න function එකක් හදාගන්නවා 
+    // async function placeOrder(){
+    //     const order = {
+    //         name:"Neshan",
+    //         items:[],
+    //         address:"No25, Bibile",
+    //         phone:"0767180351"
+    //     }
+    //     cart.forEach(
+    //         (item)=>{
+    //             order.items.push({
+    //                 productID: item.product.productID,
+    //                 qty:item.qty
+    //             })
+    //         }
+    //     )
+    //     try{
+    //         await axios.post(import.meta.env.VITE_API_URL+"/orders", order)
         
+    //     }catch(err){
+    //         console.error(err)
+    //     }
+    // }
+    
     return(
         <div className="w-full h-[calc(100vh-50px)] overflow-y-scroll bg-gray-50">
             
@@ -107,11 +132,7 @@ export default function Checkout(){
             }
 
             <div className="bg-secondary w-[650px] h-[100px] sticky bottom-0 rounded-2xl shadow-lg flex items-center px-6 border border-gray-100">
-
-                <button className="bg-blue-500 text-white font-semibold px-6 py-3 rounded-full hover:bg-blue-600 transition-all shadow-md">
-                    BUY NOW
-                </button>
-
+                <CheckoutDetailsModal cart={cart}/>
                 <span className="text-2xl font-bold text-white absolute right-6 border-b-2 border-accent pb-1 hover:border-red-500">
                     {getFormattedPrice(getCartTotal(cart))}
                 </span>

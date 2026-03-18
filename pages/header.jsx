@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import UserData from "../src/components/userdata";
 
 export default function Header(){
     return(
@@ -15,6 +16,11 @@ export default function Header(){
                 <Link to="/about" className="text-white text-lg mx-4 hover:border-b-2">About</Link>
                 <Link to="/contact" className="text-white text-lg mx-4 hover:border-b-2">Contact</Link>
             </div>
-            <Link to="/cart" className="absolute right-10 cursor-pointer"><MdOutlineShoppingCart size={30} color="white"/></Link>
+        
+            
+            <div className="absolute right-10 flex h-full justify-center items-center gap-5">
+                <Link to="/cart" className="cursor-pointer"><MdOutlineShoppingCart size={30} color="white"/></Link>
+                <UserData/>
+            </div>
         </header>
     )}

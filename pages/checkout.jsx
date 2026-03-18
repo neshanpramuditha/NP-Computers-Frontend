@@ -5,39 +5,17 @@ import getFormattedPrice from "./utils/price-format"
 import { useLocation, useNavigate } from "react-router-dom"
 import CheckoutDetailsModal from "../src/components/checkoutdetailsModel"
 
+
 export default function Checkout(){
 
     const location = useLocation()
     const [cart, setcart] = useState(location.state || [])
     const navigate = useNavigate()
 
+
     if (location.state == null){
         navigate ("/products")
     }
-    
-    // // Place කරන ඕඩර් එකේ විස්තර BackEnd එකට යවන්න function එකක් හදාගන්නවා 
-    // async function placeOrder(){
-    //     const order = {
-    //         name:"Neshan",
-    //         items:[],
-    //         address:"No25, Bibile",
-    //         phone:"0767180351"
-    //     }
-    //     cart.forEach(
-    //         (item)=>{
-    //             order.items.push({
-    //                 productID: item.product.productID,
-    //                 qty:item.qty
-    //             })
-    //         }
-    //     )
-    //     try{
-    //         await axios.post(import.meta.env.VITE_API_URL+"/orders", order)
-        
-    //     }catch(err){
-    //         console.error(err)
-    //     }
-    // }
     
     return(
         <div className="w-full h-[calc(100vh-50px)] overflow-y-scroll bg-gray-50">

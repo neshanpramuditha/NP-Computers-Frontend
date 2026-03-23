@@ -3,6 +3,7 @@ import AdminPage from "../pages/admin";
 import HomePage from "../pages/home";
 import LoginPage from "../pages/login";
 import { Toaster } from "react-hot-toast";
+import RegisterPage from "../pages/register";
 
 function App() { //මේකත් සම්පුර්ණ website එකම තියාගෙන ඉන්න තනි ටැග් එකක් 
                 // ProductCard, onSaleNow tag වගේම 
@@ -14,6 +15,7 @@ function App() { //මේකත් සම්පුර්ණ website එකම �
           <Route path="/*" element={<HomePage />} />
           <Route path="/admin/*" element={<AdminPage />} /> {/* admin කියල එන ඕන  දෙයක් ගන්නව /* එක දැම්මම (ex- /admin/products)*/}
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage/>}/>
         </Routes>
       </div>
       </>

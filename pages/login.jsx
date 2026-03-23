@@ -10,24 +10,6 @@ export default function LoginPage(){
 
     const navigate = useNavigate(); // pages අතර smoothly මාරු වෙන්න portal එකක් හදාගන්න මේ hook එක පාවිච්චි කරනව
 
-    // function login(){
-    //     console.log("Email: ", email)
-    //     console.log("Password: ", password)
-
-    //     axios.post("http://localhost:3000/users/login", {
-    //         email: email,
-    //         password: password
-    //     }).then (
-    //         (response)=>{
-    //             console.log(response)
-    //         }
-    //     ).catch(
-    //         ()=>{
-    //             console.log("Login failed")
-    //         }
-    //     )
-    // }
-
     async function login(){
         try{
             const response = await axios.post(import.meta.env.VITE_API_URL + "/users/login", {
@@ -43,7 +25,7 @@ export default function LoginPage(){
                 //window.location.href = "/admin/" මේකෙදි පේජ් එකකින් පේජ් එකකට අයනකොට ස්මූත් නෑ - පරණ  කරමය මේක
                 navigate("/admin/")
             }else{
-                //Home page for user
+                navigate("/")
             }
             // alert("Login successful")
             toast.success("Login successful")
@@ -82,9 +64,9 @@ export default function LoginPage(){
                     
                     <button 
                     onClick={login}
-                    className="w-[80%] h-12 mx-auto mt-12 bg-accent text-white font-bold rounded-lg text-lg hover:bg-blue-500 transition">Login</button>
+                    className="w-[80%] h-12 mx-auto mt-12 bg-accent text-white font-bold rounded-lg text-lg hover:bg-blue-500 transition">Sign Up</button>
                     
-                    <button className="w-[80%] h-12 mx-auto mt-5 border-2 border-accent text-white font-bold rounded-lg text-lg hover:bg-blue-500 transition ">Login With Google</button>
+                    <button className="w-[80%] h-12 mx-auto mt-5 border-2 border-accent text-white font-bold rounded-lg text-lg hover:bg-blue-500 transition ">Sign Up With Google</button>
                     <p className="text-right pr-[45px] mt-[5px]">Don't have an account
                         <Link to="/register" className="text-accent hover:underline font-bold"> Register</Link>
                     </p>

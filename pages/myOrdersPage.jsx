@@ -1,12 +1,14 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import LoadingAnimation from "../../src/components/loadingAnimation"
-import getFormattedPrice from "../utils/price-format"
-import getFormattedDate from "../utils/dateFormat"
-import toast from "react-hot-toast"
-import ViewOrderInfoModel from "../../src/components/viewOrderInfoModel"
 
-export default function AdminOrdersPage(){
+import toast from "react-hot-toast"
+
+import CustomerViewOrderInfoModel from "../src/components/customersViewOrderInfoModel"
+import getFormattedDate from "./utils/dateFormat"
+import getFormattedPrice from "./utils/price-format"
+import LoadingAnimation from "../src/components/loadingAnimation"
+
+export default function MyOrdersPage(){
 
     const [orders, setOrders] = useState([])
     const [pageNumber, setPageNumbers] = useState(1)
@@ -111,7 +113,7 @@ export default function AdminOrdersPage(){
 
                                         <td className="px-6 py-4 text-center">
                                             <div className="flex justify-center gap-2">
-                                                <ViewOrderInfoModel order={order}/>
+                                                <CustomerViewOrderInfoModel order={order}/>
                                             </div>
                                         </td>
 

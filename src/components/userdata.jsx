@@ -23,6 +23,12 @@ export default function UserData(){
                         setUser(response.data)
                     }
                 )
+                .catch(
+                    ()=>{
+                        localStorage.removeItem("token")
+                        window.location.href="/login"
+                    }
+                )
             }
         }, []
     )
@@ -35,7 +41,7 @@ export default function UserData(){
         </div>:
         <div className="w-[150px] h-[50px] border-1 border-white flex justify-between items-center rounded-full overflow-hidden shadow-2xl">
                 
-                <img src={user.images || "/images/default-profile.png"} alt="profile" className="w-[50px] h-[50px] object-cover"/>
+                <img src={user.image || "/images/default-profile.png"} alt="profile" className="w-[50px] h-[50px] object-cover"/>
                 
 
             <select value={state} onChange={

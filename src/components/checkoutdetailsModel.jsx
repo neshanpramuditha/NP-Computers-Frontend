@@ -32,7 +32,12 @@ export default function CheckoutDetailsModal(props){
                 setFirstName(response.data.firstName)
                 setLastName(response.data.lastName)
             }
-        )
+        ).catch(
+                    ()=>{
+                        localStorage.removeItem("token")
+                        window.location.href="/login"
+                    }
+                )
     }, [])
     
 

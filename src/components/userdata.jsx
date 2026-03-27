@@ -64,9 +64,9 @@ export default function UserData(){
             }
             className="bg-accent text-white">
                 <option value="me" className="text-white p-2">{user.firstName}</option>
-                <option value="orders" className="text-white p-2">My orders</option>
-                <option value="settings" className="text-white p-2">Settings</option>
-                <option value="logout" className="text-white p-2">Logout</option>
+                <option value="orders" className="text-white p-2 cursor-pointer">My orders</option>
+                <option value="settings" className="text-white p-2 cursor-pointer">Settings</option>
+                <option value="logout" className="text-white p-2 cursor-pointer">Logout</option>
             </select>
         </div>
         }

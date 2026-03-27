@@ -29,16 +29,11 @@ export default function Overview(){
         },[]
     )
     return(
-        <div className="w-full h-[calc(100vh-50px)] flex justify-center items-center ">
+        <div className="w-full lg:h-[calc(100vh-50px)] flex justify-center items-center">
             {
                 product==null?<LoadingAnimation/>:
-                <div className="w-full h-full flex ">
-                    <div className="w-[50%] h-full flex justify-center items-center">
-                        <ImageSlideShow images={product.images}/>
-                    </div>
-                    
-                    <div className="w-[50%] h-full p-5 flex flex-col justify-center">
-                        <h1 className="text-3xl font-bold mb-4">{product.name}
+                <div className="w-full flex flex-col lg:flex-row bg-primary p-4 lg:p-0">
+                    <h1 className="text-3xl font-bold mb-4 lg:hidden">{product.name}
                             <span>
                                 {
                                 product.altNames.map(
@@ -48,7 +43,24 @@ export default function Overview(){
                                 )
                                 }
                             </span>
-                        </h1>
+                    </h1>
+                    <div className="w-full lg:w-[50%] lg:h-full flex justify-center items-center">
+                        <ImageSlideShow images={product.images}/>
+                    </div>
+                    
+                    <div className="lg:w-[50%] h-full p-5 flex flex-col justify-center">
+                        <h1 className="hidden lg:block text-3xl font-bold mb-4">{product.name}
+                            <span>
+                                {
+                                product.altNames.map(
+                                    (altNames, index)=>{
+                                        return(<span key={index} className=" text-gray-500 font-medium">, {altNames}</span>)
+                                    }
+                                )
+                                }
+                            </span>
+                    </h1>
+
                         {/* Brand & model if available */}
                         {(product.brand || product.model)&&
                         <p className="text-lg font-medium">

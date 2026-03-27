@@ -37,13 +37,16 @@ export default function LoginPage(){
 
     return(
         <div className="w-full h-full bg-[url(/background.jpg)] bg-cover bg-center no-repeat flex">
-            <div className="w-[50%] h-full flex justify-center items-center flex-col">
+            <div className="w-[50%] h-full hidden lg:flex justify-center items-center flex-col">
                 <img src="/logo.png" alt="logo" className="w-[400px] h-[400px] object-center"/>
                 <h1 className="text-white text-4xl font-bold mt-5">N Computers</h1>
             </div>
 
-            <div className="w-[50%] h-full flex justify-center items-center">
+            <div className="w-full lg:w-[50%] h-full flex justify-center items-center">
                 <div className="w-[450px] h-[600px] backdrop-blur-md shadow-2xl rounded-lg flex-col justify-center items-center text-center text-white">
+                    
+                    <img src="/logo.png" className="w-[100px] mx-auto mt-5 lg:hidden"/>
+                    <h1 className="lg:hidden text-3xl font-bold mt-3 text-white text-center">N COMPUTERS</h1>
                     
                     <input type="email" placeholder="Email"
                         onChange={
@@ -51,7 +54,7 @@ export default function LoginPage(){
                             setEmail(e.target.value);
                         }
                     }
-                    className="w-[80%] h-12 mx-auto mt-32 rounded-md px-4 text-lg outline-none border-2"/>
+                    className="lg:mt-32 w-[80%] h-12 mx-auto mt-8 rounded-md px-4 text-lg outline-none border-2"/>
                     
                     <input type="password" placeholder="Password"
                     onChange={

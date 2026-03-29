@@ -1,3 +1,4 @@
+import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -9,8 +10,32 @@ export default function RegisterPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-
     const navigate = useNavigate();
+
+    const googleLogin = useGoogleLogin(
+    {
+        onSuccess:(response)=>{
+            axios.post(import.meta.env.VITE_API_URL+"/users/google-login", {token:response.access_token})
+            
+            .then((response)=>{
+                toast.success("Google login successful!")
+                localStorage.setItem("token", response.data.token)
+
+                if(response.data.role == "admin"){
+                    navigate("/admin/")
+                }else{
+                    navigate("/")
+                }
+            
+            }).catch((err)=>{
+                toast.error(err?.response?.data?.message || "Google login failed. Please try again.")
+            });
+        },
+        onError:()=>{
+            toast.error("Google login failed. Please try again.")
+        }
+    }
+)
 
     async function signup() {
 
@@ -115,7 +140,9 @@ export default function RegisterPage() {
                     </button>
 
                     {/* Google Button */}
-                    <button className="w-full h-12 border-2 border-accent text-white font-bold rounded-lg text-lg hover:bg-blue-500 transition">
+                    <button 
+                    onClick={googleLogin}
+                    className="w-full h-12 border-2 border-accent text-white font-bold rounded-lg text-lg hover:bg-blue-500 transition">
                         Sign up with Google
                     </button>
 

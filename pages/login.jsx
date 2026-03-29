@@ -1,3 +1,4 @@
+import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -7,9 +8,33 @@ import { Link, useNavigate } from "react-router-dom";
 export default function LoginPage(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
     const navigate = useNavigate(); // pages අතර smoothly මාරු වෙන්න portal එකක් හදාගන්න මේ hook එක පාවිච්චි කරනව
+    
+    const googleLogin = useGoogleLogin(
+        {
+            onSuccess:(response)=>{
+                axios.post(import.meta.env.VITE_API_URL+"/users/google-login", {token:response.access_token})
+                
+                .then((response)=>{
+                    toast.success("Google login successful!")
+                    localStorage.setItem("token", response.data.token)
 
+                    if(response.data.role == "admin"){
+                        navigate("/admin/")
+                    }else{
+                        navigate("/")
+                    }
+                
+                }).catch((err)=>{
+                    toast.error(err?.response?.data?.message || "Google login failed. Please try again.")
+                });
+            },
+            onError:(error)=>{
+                toast.error("Google login failed. Please try again.")
+            }
+        }
+    )
+    
     async function login(){
         try{
             const response = await axios.post(import.meta.env.VITE_API_URL + "/users/login", {
@@ -69,7 +94,8 @@ export default function LoginPage(){
                     onClick={login}
                     className="w-[80%] h-12 mx-auto mt-12 bg-accent text-white font-bold rounded-lg text-lg hover:bg-blue-500 transition">Sign Up</button>
                     
-                    <button className="w-[80%] h-12 mx-auto mt-5 border-2 border-accent text-white font-bold rounded-lg text-lg hover:bg-blue-500 transition ">Sign Up With Google</button>
+                    <button onClick={googleLogin}
+                    className="w-[80%] h-12 mx-auto mt-5 border-2 border-accent text-white font-bold rounded-lg text-lg hover:bg-blue-500 transition ">Sign Up With Google</button>
                     <p className="text-right pr-[45px] mt-[5px]">Don't have an account
                         <Link to="/register" className="text-accent hover:underline font-bold"> Register</Link>
                     </p>

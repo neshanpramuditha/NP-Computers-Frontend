@@ -32,7 +32,7 @@ export default function AdminProductPage(){
 
     return(
         <div className="w-full h-full overflow-hidden">
-          <div className="p-6 bg-primary min-h-screen">
+          <div className="p-1 bg-primary min-h-screen max-w-screen">
   <div className="bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-200">
 
     {/* Header */}
@@ -52,7 +52,7 @@ export default function AdminProductPage(){
       <table className="min-w-full text-sm text-left">
 
         {/* Sticky Head */}
-        <thead className="bg-primary text-secondary uppercase text-sm sticky top-0 z-10">
+        <thead className="bg-primary text-secondary uppercase text-xs text-center sticky top-0 z-10">
           <tr>
             <th className="px-6 py-4">Product ID</th>
             <th className="px-6 py-4">Name</th>

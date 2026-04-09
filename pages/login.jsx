@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function LoginPage(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const navigate = useNavigate(); // pages අතර smoothly මාරු වෙන්න portal එකක් හදාගන්න මේ hook එක පාවිච්චි කරනව
+    const navigate = useNavigate();
     
     const googleLogin = useGoogleLogin(
         {
@@ -46,8 +46,7 @@ export default function LoginPage(){
             localStorage.setItem("token",response.data.token)
 
             if(response.data.role == "admin"){
-                //Redirect to Admin dashboard
-                //window.location.href = "/admin/" මේකෙදි පේජ් එකකින් පේජ් එකකට අයනකොට ස්මූත් නෑ - පරණ  කරමය මේක
+
                 navigate("/admin/")
             }else{
                 navigate("/")
@@ -63,15 +62,13 @@ export default function LoginPage(){
     return(
         <div className="w-full h-full bg-[url(/background.jpg)] bg-cover bg-center no-repeat flex">
             <div className="w-[50%] h-full hidden lg:flex justify-center items-center flex-col">
-                <img src="/logo.png" alt="logo" className="w-[400px] h-[400px] object-center"/>
-                <h1 className="text-white text-4xl font-bold mt-5">N Computers</h1>
+                <img src="/logo1.png" alt="logo" className="w-[400px] h-[400px] object-center"/>
             </div>
 
             <div className="w-full lg:w-[50%] h-full flex justify-center items-center">
                 <div className="w-[450px] h-[600px] backdrop-blur-md shadow-2xl rounded-lg flex-col justify-center items-center text-center text-white">
                     
-                    <img src="/logo.png" className="w-[100px] mx-auto mt-5 lg:hidden"/>
-                    <h1 className="lg:hidden text-3xl font-bold mt-3 text-white text-center">N COMPUTERS</h1>
+                    <img src="/logo1.png" className="w-[100px] mx-auto mt-5 lg:hidden"/>
                     
                     <input type="email" placeholder="Email"
                         onChange={
@@ -95,7 +92,7 @@ export default function LoginPage(){
                     className="w-[80%] h-12 mx-auto mt-12 bg-accent text-white font-bold rounded-lg text-lg hover:bg-blue-500 transition">Sign Up</button>
                     
                     <button onClick={googleLogin}
-                    className="w-[80%] h-12 mx-auto mt-5 border-2 border-accent text-white font-bold rounded-lg text-lg hover:bg-blue-500 transition ">Sign Up With Google</button>
+                    className="w-[80%] h-12 mx-auto mt-5 border-2 border-accent text-white font-bold rounded-lg text-lg hover:bg-accent transition ">Sign Up With Google</button>
                     <p className="text-right pr-[45px] mt-[5px]">Don't have an account
                         <Link to="/register" className="text-accent hover:underline font-bold"> Register</Link>
                     </p>

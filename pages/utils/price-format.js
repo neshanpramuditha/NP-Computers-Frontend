@@ -1,8 +1,8 @@
 export default function getFormattedPrice(price) {
     
-    //is price is a valid nymber
+    
     if (price == null){
-        return "N/A"; // Return "N/A-(not a number)" if price is null or undefined
+        return "N/A"; 
     }
     const priceInNumber = Number(price);
     if (isNaN(priceInNumber)) {

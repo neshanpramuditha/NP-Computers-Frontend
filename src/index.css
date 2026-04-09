@@ -1,13 +1,11 @@
 @import "tailwindcss";
 
-@theme{ /*අපිට ඕන පාටක් ඇඩ් කරගන්න පුළුවන් මෙහෙම */
+@theme{ 
     --color-primary: #d4f0fc;
     --color-secondary: #01303f;
     --color-accent: #02a9f7;
 } 
 
-
-/*Transparent scroll track class called hide-scroll-track*/
 .hide-scroll-track::-webkit-scrollbar{
   width: 6px;
 }
@@ -18,4 +16,13 @@
   background-color: rgba(0,0,0,0.2);
   border-radius: 20px;
   border: 2px solid transparent;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
 }

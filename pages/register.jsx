@@ -75,11 +75,10 @@ export default function RegisterPage() {
             {/* Left Side */}
             <div className="w-1/2 hidden md:flex flex-col justify-center items-center text-white">
                 <img
-                    src="/logo.png"
+                    src="/logo1.png"
                     alt="logo"
-                    className="w-[300px] h-[300px] object-contain"
+                    className="w-[400px] h-[400px] object-contain"
                 />
-                <h1 className="text-4xl font-bold mt-5">N Computers</h1>
             </div>
 
             {/* Right Side */}
@@ -142,7 +141,7 @@ export default function RegisterPage() {
                     {/* Google Button */}
                     <button 
                     onClick={googleLogin}
-                    className="w-full h-12 border-2 border-accent text-white font-bold rounded-lg text-lg hover:bg-blue-500 transition">
+                    className="w-full h-12 border-2 border-accent text-white font-bold rounded-lg text-lg hover:bg-accent transition">
                         Sign up with Google
                     </button>
 

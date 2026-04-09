@@ -8,7 +8,7 @@ export default function ImageSlideShow(props){
         <div className="w-[500px] h-[600px] flex flex-col gap-4">
 
             {/* Main Image */}
-            <div className="w-full h-[500px] rounded-xl overflow-hidden shadow-md bg-gray-50">
+            <div className="w-full h-[500px] rounded-xl overflow-hidden">
                 <img 
                     src={images[selectedImage]} 
                     className="w-full h-full object-cover transition duration-300 hover:scale-105"

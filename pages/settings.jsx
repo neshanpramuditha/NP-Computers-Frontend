@@ -85,7 +85,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="w-full min-h-[calc(100vh-50px)] flex flex-col md:flex-row justify-center items-start md:items-center gap-6 bg-gray-50 px-4 py-6 md:py-0">
+    <div className="bg-secondary w-full min-h-[calc(100vh-50px)] flex flex-col md:flex-row justify-center items-start md:items-center gap-6 bg-gray-50 px-4 py-6 md:py-0">
       {/* Account Settings Card */}
       <div className="w-full md:w-[400px] rounded-2xl bg-white shadow-lg p-6 flex flex-col items-center gap-4">
         <h1 className="text-2xl font-bold text-accent text-center">

@@ -10,21 +10,7 @@ export function getCart(){
         return cart
     }
 }
-// Example structure of cart
-// const sampleCart = [
-//     {
-//         product:{
-//             productID:"123",
-//             name : "Product 1",
-//             labelledprice : 1000,
-//             price : 1500,
-//             image: "http//product1.jpg",
-//         },
-//         quantity : 2
-//     },
-//     {.................},
-//     {.................}
-// ]
+
 
 export function addToCart(product, qty){
     
@@ -55,7 +41,7 @@ export function addToCart(product, qty){
                     qty : qty
                 })
         }
-        //දැනටමත් product එක cart එකේ තියෙනව නම්
+
         else{
             const newQty = cart[existingProductIndex].qty + qty
 
@@ -75,7 +61,6 @@ export function addToCart(product, qty){
 export function getCartTotal(cart){
     let total = 0
 
-    // cart එකෙන් item එක item එක ගානේ ගන්නවා 
     cart.forEach( 
         (cartItem)=>{
             total += cartItem.product.price * cartItem.qty

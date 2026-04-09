@@ -35,7 +35,7 @@ export default function MyOrdersPage(){
     return(
         <div className="w-full h-full overflow-hidden">
 
-            <div className="p-6 bg-primary min-h-screen">
+            <div className="p-6 bg-secondary min-h-screen">
 
                 <div className="bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-200">
 

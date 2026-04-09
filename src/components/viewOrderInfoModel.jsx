@@ -41,8 +41,7 @@ export default function ViewOrderInfoModel(props){
 
         console.log("Saving...", updatedOrder)
 
-        // TODO: Replace with your API call
-        // axios.put(`/api/orders/${order._id}`, updatedOrder)
+        
 
         setIsVisible(false)
     }

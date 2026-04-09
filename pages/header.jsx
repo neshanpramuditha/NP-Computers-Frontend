@@ -22,7 +22,7 @@ export default function Header(){
 }, [isOpen]);
 
     return(
-        <header className="w-full sticky top-0 bg-accent/95 backdrop-blur-md shadow-md h-[60px] flex justify-center items-center z-50 border-b border-white/10">
+        <header className="w-full sticky top-0 bg-accent/95 backdrop-blur-md shadow-md h-[60px] flex justify-center items-center z-55 border-b border-white/10">
             
             {/* Mobile Menu Icon */}
             <GiHamburgerMenu 
@@ -34,8 +34,10 @@ export default function Header(){
 
             {/* Logo */}
             <div className="h-full flex items-center absolute left-4 gap-2">
-                <img src="/public/logo.png" alt="logo" className="h-[36px] lg:h-[42px] object-contain drop-shadow-sm" />
-                <h1 className="text-white text-lg lg:text-2xl font-semibold tracking-wide">NP Computers</h1>
+                <Link to="/">
+                <img src="/logo2.png" alt="logo" className="h-[36px] lg:h-[42px] object-contain drop-shadow-sm" />
+                </Link>
+                <h1 className="text-white text-lg lg:text-1xl font-semibold tracking-wide">NP Computers</h1>
             </div>
 
             {/* Desktop Navigation */}
@@ -78,13 +80,13 @@ export default function Header(){
 
             {/* Mobile Sidebar */}
             {isOpen &&
-            <div className="fixed bg-black/60 backdrop-blur-sm w-full h-screen top-0 left-0 transition-opacity duration-300">
+            <div className="fixed bg-black/60 backdrop-blur-sm w-full h-screen top-0 left-0 transition-opacity duration-300 z-99">
                 
                 <div className="absolute right-0 top-0 w-[300px] h-full bg-white shadow-2xl rounded-l-2xl flex flex-col">
 
                     {/* Sidebar Header */}
                     <div className="h-[60px] bg-accent flex items-center px-4 relative shadow-md">
-                        <img src="/public/logo.png" alt="logo" className="h-[36px]" />
+                        <img src="/logo2.png" alt="logo" className="h-[36px]" />
                         <h1 className="text-white text-lg font-semibold ml-2">NP Computers</h1>
 
                         <LuPanelRightClose 

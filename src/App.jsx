@@ -7,18 +7,18 @@ import RegisterPage from "../pages/register";
 import ForgotPassword from "../pages/forgetPassword";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
-export default function App() { //මේකත් සම්පුර්ණ website එකම තියාගෙන ඉන්න තනි ටැග් එකක් 
-                // ProductCard, onSaleNow tag වගේම 
+export default function App() { 
+                
   return (
       <GoogleOAuthProvider clientId="916749218322-p7nd9pkerv8hrtcmkjisue0cfbjutl35.apps.googleusercontent.com">
       <div className="w-full h-screen bg-primary text-secondary">
         <Toaster position="top-right"/>
         <Routes>
           <Route path="/*" element={<HomePage />} />
-          <Route path="/admin/*" element={<AdminPage />} /> {/* admin කියල එන ඕන  දෙයක් ගන්නව /* එක දැම්මම (ex- /admin/products)*/}
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/admin/*" element={<AdminPage />} />
           <Route path="/register" element={<RegisterPage/>}/>
           <Route path="forgot-password" element={<ForgotPassword/>}/>
+          <Route path="/login" element={<LoginPage/>}/>
         </Routes>
       </div>
       </GoogleOAuthProvider>

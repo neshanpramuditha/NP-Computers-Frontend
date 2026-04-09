@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom"
+import { MdOutlineShoppingCart } from "react-icons/md"
 import getFormattedPrice from "../../pages/utils/price-format"
+import toast from "react-hot-toast"
 
 export default function ProductCard(props){
-  const product = props.product
+  const { product, addToCart } = props
 
   return(
     <Link 
@@ -29,6 +31,7 @@ export default function ProductCard(props){
 
       </div>
 
+      {/* Product Info */}
       <div className="mb-2">
         <span className="text-[11px] tracking-wide text-gray-400">
           {product.productID}
@@ -41,7 +44,6 @@ export default function ProductCard(props){
 
       {/* Price Section */}
       <div className="mt-3">
-
         {
           product.labelledPrice > product.price &&
           <p className="text-sm text-red-500 line-through opacity-70">
@@ -52,8 +54,30 @@ export default function ProductCard(props){
         <p className="text-lg text-accent font-bold tracking-wide">
           {getFormattedPrice(product.price)}
         </p>
-
       </div>
+
+      {/* Add to Cart Button */}
+      <button
+        onClick={(e)=>{
+          e.preventDefault() // prevent Link navigation
+          e.stopPropagation()
+
+          if (!addToCart) {
+            toast.error("Unable to add product to cart")
+            return
+          }
+
+          addToCart(product , 1)
+          toast.success(product.name + " added to cart")
+        }}
+        className="absolute bottom-4 right-4 bg-accent hover:bg-accent/90 p-3 rounded-full shadow-lg transition-all duration-300 group-hover:scale-105 hover:scale-110"
+      >
+        <MdOutlineShoppingCart 
+          size={26} 
+          color="white" 
+          className="transition-transform duration-200 group-hover:scale-110"
+        />
+      </button>
 
     </Link>
   )

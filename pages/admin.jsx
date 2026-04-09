@@ -21,9 +21,7 @@ export default function AdminPage(){
 
             </div>
             <div className="w-[calc(100%-300px)] h-full border-8 border-accent rounded-[20px] bg-primary p-4">
-            {/* calc එකෙන් අපිට function එකක් ලියාගන්න පුළුවන් width එක calculate කරගන්න මෙහෙම
-            300px ක් දුබුරු කොටුව ආවම අනිත් කොටුව page එකේ සම්පුර්ණ ඉඩ ගන්නවා එතකොට.
-            මේක flex-1 කියල දීල කරනවට වඩා සාර්ථකයි */}
+            
                 <Routes>
                     <Route path="/" element={<AdminOrdersPage/>} />
                     <Route path="/products" element={<AdminProductPage/>} />

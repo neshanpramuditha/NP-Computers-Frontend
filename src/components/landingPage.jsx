@@ -393,7 +393,7 @@ function TrustBar() {
     { icon: <MdSecurity size={28} />, title: "Secure Payments", desc: "SSL- encrypted checkout" },
   ];
   return (
-    <section className="py-14 bg-secondary sticky top-0 z-40">
+    <section className="py-14 bg-secondary sticky top-0 z-40 sm:hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-16 grid grid-cols-2 lg:grid-cols-4 gap-8">
         {features.map((f) => (
           <div key={f.title} className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">

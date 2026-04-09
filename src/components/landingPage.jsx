@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import BotpressChat from "./BotpressChat";
 import {
   MdOutlineShoppingCart,
   MdArrowForward,
@@ -582,6 +583,7 @@ export default function LandingPage() {
         rel="stylesheet"
       />
 
+      <BotpressChat />
       <HeroSection />
       <TrustBar />
       <CategoriesSection />

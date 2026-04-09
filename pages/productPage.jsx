@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { addToCart } from "./utils/cart";
 import ProductCard from "../src/components/productCard";
 import LoadingAnimation from "../src/components/loadingAnimation";
+import BotpressChat from "../src/components/BotpressChat";
 
 export default function ProductPage() {
   const [products, setProducts] = useState([]);
@@ -45,10 +46,12 @@ export default function ProductPage() {
   }, [searchQuery, loading]);
 
   return (
-    <div
-      className="min-h-screen bg-secondary relative overflow-hidden font-sans pb-20"
-      style={{ fontFamily: "'Sora', sans-serif" }}
-    >
+    <>
+      <BotpressChat />
+      <div
+        className="min-h-screen bg-secondary relative overflow-hidden font-sans pb-20"
+        style={{ fontFamily: "'Sora', sans-serif" }}
+      >
       <link
         href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800;900&display=swap"
         rel="stylesheet"
@@ -106,5 +109,6 @@ export default function ProductPage() {
         ))}
       </div>
     </div>
+    </>
   );
 }

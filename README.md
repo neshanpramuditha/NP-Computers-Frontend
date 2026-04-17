@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/badge/Visit%20Website-000?style=for-the-badge&logo=vercel&logoColor=white" />
 </a>
 
-<br><br>
+<br>
 
 🐙 **Backend Repository**  
 <a href="https://github.com/neshanpramuditha/NP-Computers-Backend" target="_blank">
